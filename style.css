@@ -1,0 +1,17 @@
+nav{
+    margin-top: auto;
+    text-align: center;
+    color: white;
+    background-color: grey;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+    padding:1% 
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
