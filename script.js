@@ -18,21 +18,42 @@ $("button").on("click", function (event) {
 
         var newCityBtn = $('<a>');
         newCityBtn.addClass("list-group-item");
-        newCityBtn.attr("data-toggle", "list")
+        newCityBtn.attr("data-city", response.city.cityName);
+        newCityBtn.on("click", function () {
+            let cityName = this.text;
+            let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=8ce642e2d21bbeaa43533bd47e431320";
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                updateCityInfo(response)
+            }
+            )
+
+
+        })
+
         newCityBtn.text(cityName);
         $(".list-group").append(newCityBtn);
 
-        var disCityName = $("<h1>");
-        disCityName.text(response.city.name);
-        $(".container").append(disCityName)
-
-        var disDate = $("<h2>");
-        disDate.text(response.list[0].dt_txt);
-        $(".container").append(disDate)
-
-
+        updateCityInfo(response)
     })
+
 })
 
 
+
+    function updateCityInfo (response) {
+        $(".city").text(response.city.name);
+
+        var disDate = response.list[0].dt_txt.split(" ")[0];
+        $(".date").text(disDate);
+
+
+        var tempConvert = Math.floor((response.list[0].main.temp - 273.15) * 1.8 + 32)
+        $(".temp").text("Temperature: " + tempConvert + " F")
+
+        
+        
+    }
 
