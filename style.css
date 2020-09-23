@@ -7,3 +7,12 @@ nav{
     font-size: xx-large;
     padding:1% 
 }
+.jumbotron{
+    background-color: lightgray;
+}
+#maintab{
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-top 5%
+}
+

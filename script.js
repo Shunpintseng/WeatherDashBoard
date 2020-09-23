@@ -1,9 +1,5 @@
 //jquery HTML elementsearch button for the city name input
 
-
-
-
-
 $("button").on("click", function (event) {
     event.preventDefault();
     var cityName = $("input").val()
@@ -14,6 +10,8 @@ $("button").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
+     
+
 
 
         var newCityBtn = $('<a>');
@@ -43,17 +41,22 @@ $("button").on("click", function (event) {
 
 
 
-    function updateCityInfo (response) {
-        $(".city").text(response.city.name);
+function updateCityInfo (response) {
+    $(".city").text(response.city.name);
 
-        var disDate = response.list[0].dt_txt.split(" ")[0];
-        $(".date").text(disDate);
+    var disDate = response.list[0].dt_txt.split(" ")[0];
+    $(".date").text(disDate);
 
 
-        var tempConvert = Math.floor((response.list[0].main.temp - 273.15) * 1.8 + 32)
-        $(".temp").text("Temperature: " + tempConvert + " F")
+    var tempConvert = Math.floor((response.list[0].main.temp - 273.15) * 1.8 + 32)
+    $(".temp").text("Temperature: " + tempConvert + " F");
 
-        
-        
-    }
+    $(".humidity").text("Humidity: " + response.list[0].main.humidity + "%");
 
+    $(".windSpeed").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
+
+    var weatherIcon = (response.list[0].weather[0].icon);
+        var icon = "http://openweathermap.org/img/wn/" + weatherIcon + ".png"
+
+    $("#weatherIcon").attr("src", icon);
+}
